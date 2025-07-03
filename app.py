@@ -99,9 +99,14 @@ with col1:
             st.error("❌ Please fill in all login and date fields.")
         else:
             # Read clients list
+            if uploaded_clients_file is None:
+                st.error("❌ Please upload a clients_list.csv file first.")
+                st.stop()
+
             df_clients = pd.read_csv(uploaded_clients_file)
             df_clients["Status"] = ""
             clients = df_clients['Client'].dropna().tolist()
+
 
             st.info("Starting automation... please wait.")
             progress_text = st.empty()
